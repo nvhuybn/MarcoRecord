@@ -1,0 +1,12 @@
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\bin\Debug\MarcoRecord.exe.config
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\bin\Debug\MarcoRecord.exe
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\bin\Debug\MarcoRecord.pdb
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\bin\Debug\Kitz.dll
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csprojAssemblyReference.cache
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.Record.resources
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.Properties.Resources.resources
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csproj.GenerateResource.cache
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csproj.CoreCompileInputs.cache
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csproj.CopyComplete
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.exe
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.pdb
