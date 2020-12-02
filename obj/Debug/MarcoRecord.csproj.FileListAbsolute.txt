@@ -9,3 +9,6 @@ E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csproj.
 E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csproj.CopyComplete
 E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.exe
 E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.pdb
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\bin\Debug\WebDriver.dll
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\bin\Debug\WebDriver.xml
+E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\obj\Debug\MarcoRecord.csprojAssemblyReference.cache
