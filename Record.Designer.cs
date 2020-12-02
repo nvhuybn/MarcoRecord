@@ -34,6 +34,8 @@
             this.ckShutdown = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnStopRecord = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblCountDown = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStartRecord
@@ -91,11 +93,30 @@
             this.btnStopRecord.UseVisualStyleBackColor = false;
             this.btnStopRecord.Click += new System.EventHandler(this.btnStopRecord_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 135);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "CountDown";
+            // 
+            // lblCountDown
+            // 
+            this.lblCountDown.AutoSize = true;
+            this.lblCountDown.Location = new System.Drawing.Point(108, 135);
+            this.lblCountDown.Name = "lblCountDown";
+            this.lblCountDown.Size = new System.Drawing.Size(0, 13);
+            this.lblCountDown.TabIndex = 7;
+            // 
             // Record
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 133);
+            this.ClientSize = new System.Drawing.Size(312, 157);
+            this.Controls.Add(this.lblCountDown);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnStopRecord);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ckShutdown);
@@ -117,6 +138,8 @@
         private System.Windows.Forms.CheckBox ckShutdown;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnStopRecord;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCountDown;
     }
 }
 
