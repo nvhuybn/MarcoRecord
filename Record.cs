@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -66,7 +68,7 @@ namespace MarcoRecord
                 listFilm.Add(new LinkFilm() { Link = link3, Time = time3 });
                 listFilm.Add(new LinkFilm() { Link = link4, Time = time4 });
                 listFilm.Add(new LinkFilm() { Link = link5, Time = time5 });
-                foreach (var film in listFilm.Where(c=>c.Time>0 && !string.IsNullOrWhiteSpace(c.Link)))
+                foreach (var film in listFilm.Where(c => c.Time > 0 && !string.IsNullOrWhiteSpace(c.Link)))
                 {
                     try
                     {
@@ -82,7 +84,7 @@ namespace MarcoRecord
                     {
                         chromeDriver.Close();
                         chromeDriver.Dispose();
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -109,29 +111,52 @@ namespace MarcoRecord
                 counter = time;
                 counterAll += time;
                 var options = new ChromeOptions();
-                options.AddExcludedArgument("enable-automation");
-                options.AddAdditionalCapability("useAutomationExtension", false);
+                //options.AddExcludedArgument("enable-automation");
+                //options.AddAdditionalCapability("useAutomationExtension", false);
                 //webBrowser1.Navigate(link1);
-                chromeDriver = new ChromeDriver(@"E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\chrome", options);
+                chromeDriver = new ChromeDriver(@"E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\chrome");
+                //chromeDriver = new FirefoxDriver(@"E:\MMO\Project\MarcoRecord\MarcoRecord\MarcoRecord\firefox");
                 WebDriverWait wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(20));
                 chromeDriver.Navigate().GoToUrl(link);
-                chromeDriver.FindElement(By.XPath("//body")).Click();
-                wait.Until(x => chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")));
-                chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")).Click();
+                while (!IsElementPresent(By.ClassName("jw-reset")))
+                {
+                    IsElementPresent(By.ClassName("jw-reset"));
+                }
+                chromeDriver.FindElement(By.ClassName("jw-reset")).Click();
+                //Thread.Sleep(30000);
+                //wait.Until(x => chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")));
+                //chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")).Click();
                 while (!IsElementPresent(By.ClassName("jw-skippable")))
                 {
                     IsElementPresent(By.ClassName("jw-skippable"));
-                }                                
+                }
                 //wait.Until(x => chromeDriver.FindElement(By.ClassName("jw-skippable")));
                 chromeDriver.FindElement(By.ClassName("jw-skippable")).Click();
+                //Actions builder = new Actions(chromeDriver);
+                //IAction seriesOfActions = builder
+                //    .MoveToElement(chromeDriver.FindElement(By.ClassName("jw-skippable")))
+                //    .Click()
+                //    .Build();
+                //seriesOfActions.Perform();
                 //Thread.Sleep(10000);
+
+                while (!IsElementPresent(By.ClassName("jw-reset")))
+                {
+                    IsElementPresent(By.ClassName("jw-reset"));
+                }
+                //wait.Until(x => chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")));
+                //chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")).Click();
+                chromeDriver.FindElement(By.ClassName("jw-reset")).Click();
+                //IAction seriesOfActions2 = builder
+                //    .MoveToElement(chromeDriver.FindElement(By.ClassName("jw-reset")))
+                //    .Click()
+                //    .Build();
+                //seriesOfActions2.Perform();
                 while (!IsElementPresent(By.ClassName("jw-icon-fullscreen")))
                 {
                     IsElementPresent(By.ClassName("jw-icon-fullscreen"));
                 }
-                //wait.Until(x => chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")));
                 chromeDriver.FindElement(By.ClassName("jw-icon-fullscreen")).Click();
-                chromeDriver.FindElement(By.XPath("//body")).Click();
                 Process qrecord = Process.GetProcessesByName("QRecord").FirstOrDefault();
                 Process chrome = Process.GetProcessesByName("chrome").FirstOrDefault();
                 if (qrecord != null && chrome != null)
@@ -169,7 +194,61 @@ namespace MarcoRecord
                 return new RecordResult() { Status = 1, Error = ex.Message };
             }
         }
+        public RecordResult Recording3(string link, int time)
+        {
+            try
+            {
+                counter = time;
+                counterAll += time;
+                Process.Start("chrome.exe",  link + " -new-window");
+                Thread.Sleep(3000);
+                SendKeys.Send("{TAB}");
+                Thread.Sleep(1000);
+                SendKeys.Send("{TAB}");
+                Thread.Sleep(1000);
+                SendKeys.Send("{ENTER}");
+                Thread.Sleep(1000);
+                Process qrecord = Process.GetProcessesByName("QRecord").FirstOrDefault();
+                Process chrome = Process.GetProcessesByName("chrome").FirstOrDefault();
+                if (qrecord != null && chrome != null)
+                {
+                    IntPtr qrecordh = qrecord.MainWindowHandle;
+                    IntPtr chromeh = chrome.MainWindowHandle;
+                    SetForegroundWindow(qrecordh);
+                    SendKeys.Send("{F6}");
+                    SetForegroundWindow(chromeh);
+                    if (counter > 0)
+                    {
+                        aTimer = new System.Windows.Forms.Timer();
+                        aTimer.Tick += new EventHandler(aTimer_Tick);
+                        aTimer.Interval = 1000; // 1 second
+                        aTimer.Start();
+                        lblCountDown.Text = counterAll.ToString();
+                    }
+                    return new RecordResult()
+                    {
+                        Status = 0
+                    };
+                }
+                else
+                {
+                    return new RecordResult()
+                    {
+                        Status = 1,
+                        Error = "Chưa mở QRecord hoặc Chrome"
+                    };
+                }
+                return new RecordResult()
+                {
+                    Status = 0
+                };
 
+            }
+            catch (Exception ex)
+            {
+                return new RecordResult() { Status = 1, Error = ex.Message };
+            }
+        }
 
         private void btnStopRecord_Click(object sender, EventArgs e)
         {

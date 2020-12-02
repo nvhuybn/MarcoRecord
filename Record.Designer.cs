@@ -49,7 +49,6 @@
             this.txtTime4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtLink4 = new System.Windows.Forms.TextBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // btnStartRecord
@@ -223,20 +222,11 @@
             this.txtLink4.Size = new System.Drawing.Size(275, 20);
             this.txtLink4.TabIndex = 15;
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(111, 295);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(710, 207);
-            this.webBrowser1.TabIndex = 21;
-            // 
             // Record
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 514);
-            this.Controls.Add(this.webBrowser1);
+            this.ClientSize = new System.Drawing.Size(468, 310);
             this.Controls.Add(this.txtTime5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtLink5);
@@ -288,7 +278,6 @@
         private System.Windows.Forms.TextBox txtTime4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtLink4;
-        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 
