@@ -21,39 +21,45 @@ namespace MarcoRecord
         }
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
+        private System.Windows.Forms.Timer aTimer;
+        private int counter = 0;
         private void btnStartRecord_Click(object sender, EventArgs e)
         {
             try
             {
-                Thread.Sleep(3000);
+                this.WindowState = FormWindowState.Minimized;
+                //Thread.Sleep(3000);
                 var time = txtTime.Text.To<int>();
                 //SendKeys.Send("{F9}");
-                // Process[] pname = Process.GetProcesses();
-                Process obs = Process.GetProcessesByName("obs64").FirstOrDefault();
+                //Process[] pname = Process.GetProcesses();
+                //return;
+                Process qrecord = Process.GetProcessesByName("QRecord").FirstOrDefault();
                 Process chrome = Process.GetProcessesByName("chrome").FirstOrDefault();
-
-                if (obs != null && chrome != null)
+                if (qrecord != null && chrome != null)
                 {
-                    IntPtr obsh = obs.MainWindowHandle;
+                    IntPtr qrecordh = qrecord.MainWindowHandle;
                     IntPtr chromeh = chrome.MainWindowHandle;
-                    SetForegroundWindow(obsh);
-                    SendKeys.Send("{F9}");
+                    SetForegroundWindow(qrecordh);
+                    SendKeys.Send("{F6}");
                     SetForegroundWindow(chromeh);
-                    if (time > 0)
+                    counter = time;
+                    if (counter > 0)
                     {
-                        Thread.Sleep(time * 1000);
-                        SetForegroundWindow(obsh);
-                        SendKeys.Send("{F10}");
+                        aTimer = new System.Windows.Forms.Timer();
+
+                        aTimer.Tick += new EventHandler(aTimer_Tick);
+
+                        aTimer.Interval = 1000; // 1 second
+
+                        aTimer.Start();
+
+                        lblCountDown.Text = counter.ToString();
+                        //Thread.Sleep(time * 1000);                        
                     }
-                    if (ckShutdown.Checked)
-                    {
-                        MessageBox.Show("Tắt máy", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //Process.Start("shutdown", "/s /t 0");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không tắt máy", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                }
+                else
+                {
+                    MessageBox.Show("Chưa mở OBS hoặc Chrome", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 //if (time > 0)
                 //{
@@ -72,18 +78,47 @@ namespace MarcoRecord
         {
             try
             {
-                Process p = Process.GetProcessesByName("obs64").FirstOrDefault();
+                Process p = Process.GetProcessesByName("QRecord").FirstOrDefault();
                 if (p != null)
                 {
+                    aTimer.Stop();
                     IntPtr h = p.MainWindowHandle;
                     SetForegroundWindow(h);
-                    SendKeys.Send("{F10}");
+                    SendKeys.Send("{F8}");
+                    MessageBox.Show("Đã thu xong", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                MessageBox.Show("Không tìm thấy QRecord", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void aTimer_Tick(object sender, EventArgs e)
+
+        {
+            counter = counter - 1;
+            Process qrecord = Process.GetProcessesByName("QRecord").FirstOrDefault();
+            lblCountDown.Text = counter.ToString();
+            if (counter == 0)
+            {
+                aTimer.Stop();
+                if (qrecord != null)
+                {
+                    IntPtr qrecordh = qrecord.MainWindowHandle;
+                    SetForegroundWindow(qrecordh);
+                    SendKeys.Send("{F8}");
+                    if (ckShutdown.Checked)
+                    {
+                        //MessageBox.Show("Tắt máy", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Process.Start("shutdown", "-s -t 10");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Đã thu xong", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }          
 
         }
     }
