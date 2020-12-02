@@ -59,7 +59,7 @@ namespace MarcoRecord
                 }
                 else
                 {
-                    MessageBox.Show("Chưa mở OBS hoặc Chrome", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Chưa mở QRecord hoặc Chrome", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 //if (time > 0)
                 //{
