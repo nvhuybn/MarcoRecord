@@ -33,7 +33,7 @@ namespace MarcoRecord
                 //SendKeys.Send("{F9}");
                 //Process[] pname = Process.GetProcesses();
                 //return;
-                Process qrecord = Process.GetProcessesByName("QRecord").FirstOrDefault();
+                Process qrecord = Process.GetProcessesByName("obs64").FirstOrDefault();
                 Process chrome = Process.GetProcessesByName("chrome").FirstOrDefault();
                 if (qrecord != null && chrome != null)
                 {
@@ -78,7 +78,7 @@ namespace MarcoRecord
         {
             try
             {
-                Process p = Process.GetProcessesByName("QRecord").FirstOrDefault();
+                Process p = Process.GetProcessesByName("obs64").FirstOrDefault();
                 if (p != null)
                 {
                     aTimer.Stop();
@@ -98,7 +98,7 @@ namespace MarcoRecord
 
         {
             counter = counter - 1;
-            Process qrecord = Process.GetProcessesByName("QRecord").FirstOrDefault();
+            Process qrecord = Process.GetProcessesByName("obs64").FirstOrDefault();
             lblCountDown.Text = counter.ToString();
             if (counter == 0)
             {
